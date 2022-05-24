@@ -7,5 +7,5 @@ func _ready():
 func _process(delta):
 	position.x += pixelesPorSegundo * delta
 	
-	if position.x > 100000:
+	if position.x > 100000000:
 		queue_free()
