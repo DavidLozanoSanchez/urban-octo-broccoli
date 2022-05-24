@@ -6,6 +6,10 @@ const velMax = 50
 const salto = -300
 const up = Vector2(0,-1)
 const gravedad = 15
+export var  pixelesPorSegundo : int = 180
+const SHOT = preload ("res://Shot.tscn")
+var tiempoHastaDisparo = 0.5
+var tiempoPorCadaDisparo = 0.5
 
 onready var sprite = $Sprite
 onready var animation = $AnimationPlayer
@@ -38,3 +42,17 @@ func _physics_process(delta): #ComprobaciÃ³n infinita
 			motion.x = lerp(motion.x ,0,0.01)
 			
 	motion = move_and_slide(motion,up)
+	
+func _process(delta):
+	tiempoHastaDisparo += delta
+	if Input.is_key_pressed(KEY_Q):
+		disparar()
+
+func disparar():
+	if tiempoHastaDisparo >= tiempoPorCadaDisparo:
+		tiempoHastaDisparo = 0
+		var shot = SHOT.instance()
+		shot.position = position
+		get_parent().add_child(shot)
+		pass
+		
